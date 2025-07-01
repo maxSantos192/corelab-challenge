@@ -4,3 +4,7 @@ node_modules
 # env files
 .env
 .env.local
+
+#database
+.postgres_data
+/src/generated/prisma
