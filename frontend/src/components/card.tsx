@@ -50,7 +50,7 @@ function Card({ note, onUpdate, onDelete }: NoteCardProps) {
   };
 
   return (
-    <div className="group relative h-[437px] w-full max-w-sm rounded-3xl bg-white">
+    <div className="group relative h-[437px] w-full max-w-sm rounded-3xl bg-white shadow-sm/10">
       <div className="flex items-center justify-between px-5 py-3.5">
         {isEditing ? (
           <input
