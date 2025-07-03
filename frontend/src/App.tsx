@@ -3,9 +3,26 @@ import Card from "./components/card";
 import Header from "./components/header";
 import { api } from "./utils/api";
 import type { NoteProps } from "./@types/note";
+import CreateNoteCard from "./components/create-note-card";
 
 function App() {
   const [notes, setNotes] = useState<NoteProps[]>([]);
+
+  const createNote = async (note: Omit<NoteProps, "id">) => {
+    try {
+      const response = await api.post("/", {
+        title: note.title,
+        content: note.content,
+        favorite: note.favorite,
+        color: note.color,
+      });
+
+      const newNote = response.data;
+      setNotes((prev) => [...prev, newNote]);
+    } catch (error) {
+      console.error("Error creating note:", error);
+    }
+  };
 
   const fetchNotes = async (search?: string) => {
     try {
@@ -60,6 +77,7 @@ function App() {
   return (
     <div>
       <Header />
+      <CreateNoteCard onCreateNote={createNote} />
       <div className="flex flex-wrap justify-center gap-6 p-6">
         {notes.map((note) => (
           <Card
